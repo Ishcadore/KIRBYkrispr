@@ -1,12 +1,12 @@
 import mysql.connector
-import tkinter
+import tkinter as tk
 from tkinter import *
 import datetime
 from datetime import *
 
 from os import path
 import sys
-sys.path.append(path.abspath("C:/Users/Johnsi3/Desktop/comp sci/Py Projects"))
+sys.path.append(path.abspath("C:/Users/Johnsi3/Desktop/comp sci/PyProjects"))
 
 import tkcalendar
 
@@ -58,11 +58,11 @@ listData = switchHouse(0)
 showData()
 #---
 def view(data):
-    label = tkinter.Label(root, text='%s' % (data))
+    label = tk.Label(root, text='%s' % (data))
     label.pack()
 
 ##app part
-class Application(Frame):
+class Application(tk.Frame):
     def say_hi(self, x):
         print("%s" % x)   
     
@@ -78,6 +78,8 @@ class Application(Frame):
             print("Banana")
         else:
             print("%s" % fruit)
+            a = Message(text=fruit)
+            a.pack()
         #frame.bind("<Button-3>", popup)    
 
     def createWidgets(self, master):
@@ -119,7 +121,7 @@ class Application(Frame):
         #master.config(menu=menu)
         #menubar = Menu(win)
         menubar = Menu(master)
-        win['menu'] = menubar
+        #win['menu'] = menubar
         
         
         menu_file = Menu(menubar)
@@ -140,32 +142,25 @@ class Application(Frame):
         
                
 
-    def __init__(self, master=None):
+    def __init__(self, frame, master):
         self.master = master
-        master.title("My Refrigerator")
-        
-        Frame.__init__(self, master)
-
-        frame = Frame(master,  width=480, height=180)
+        super(Application, self).__init__()
+        #tk.Frame.__init__(self, master)
         self.createWidgets(master)
         
-        x = tkcalendar
-        x.test() 
+        #x = tkcalendar
+        #x.test()
+        #x._today()
 
         self.pack()
-        frame.pack()         
-##App part
-
-
-##window run config
-root = Tk()
-app = Application(master=root)
-##my_gui = GUI(root)
-root.mainloop()
-
-##app.mainloop()
-##mygui.mainloop()
-##app.view(listData)
-root.destroy()
+def test(frame, parent):
+    fruity = Application(frame, parent)
+    fruity.pack()
+if __name__ == '__main__':
+    root = tk.Tk()
+    root.title("My Refrigerator")
+    tk.Frame.__init__(root)
+    frame = tk.Frame(root,  width=480, height=180)    
+    test(frame, root)
 
 #cnx.close()
